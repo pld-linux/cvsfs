@@ -6,13 +6,13 @@
 Summary:	CVSFS
 Summary(pl):	CVSFS
 Name:		cvsfs
-Version:	1.0.3
+Version:	1.0.4
 Release:	1
 License:	GPL
 Group:		Networking/Daemons
 Group(de):	Netzwerkwesen/Server
 Group(pl):	Sieciowe/Serwery
-Source0:	ftp://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.zip
+Source0:	http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.zip
 Patch0:		%{name}-config.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -42,7 +42,7 @@ Prereq:		/sbin/depmod
 %build
 %{__make} \
 %if %{smp}
-	KDEFS+=" -D__KERNEL_SMP=1"
+	CFLAGS+=" -D__KERNEL_SMP=1"
 %endif
 
 %install
@@ -54,6 +54,7 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir}} \
 install cvsmnt/cvsmnt $RPM_BUILD_ROOT%{_bindir}
 install cvsmount/cvsmount $RPM_BUILD_ROOT%{_bindir}
 install cvsmount/mount.cvsfs $RPM_BUILD_ROOT%{_bindir}
+install cvsumount/cvsmount $RPM_BUILD_ROOT%{_bindir}
 install cvsfs/cvsfs.o $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}/fs
 gzip -9nf ChangeLog README INSTALL
 
