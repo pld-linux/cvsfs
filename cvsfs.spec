@@ -1,6 +1,3 @@
-
-%define		no_install_post_compress_modules 1
-
 Summary:	CVSFS - CVS filesystem
 Summary(pl):	CVSFS - system plikowy CVS
 Name:		cvsfs
