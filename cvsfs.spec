@@ -9,6 +9,8 @@ Group:		Tools
 Source0:	ftp://download.sourceforge.net/pub/sourceforge/%{name}/%{name}-%{version}.tar.gz
 Patch0:		cvsfs-Makefile.am.patch
 URL:		http://sourceforge.net/projects/cvsfs/
+BuildRequires:	autoconf
+BuildRequires:	automake
 %{!?_without_dist_kernel:BuildRequires: kernel-headers}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -53,9 +55,9 @@ Modó³ CVS FS fla kernela SMP.
 %patch0 -p0
 
 %build
-aclocal
-automake --gnu --copy --force --add-missing
-autoconf
+%{__aclocal}
+%{__automake} --gnu --add-missing
+%{__autoconf}
 %configure 
 
 CXXFLAGS="-DMODULES -D__SMP__ -D__KERNEL_SMP=1" %{__make}
@@ -81,10 +83,6 @@ install cvsfs/cvsfs-smp.o $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}smp/fs/cvsfs
 
 %clean
 rm -rf $RPM_BUILD_ROOT
-
-%post
-
-%postun
 
 %post -n kernel-cvsfs
 /sbin/depmod -a
