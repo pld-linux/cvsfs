@@ -13,6 +13,7 @@ Group:		Tools
 Source0:	ftp://download.sourceforge.net/pub/sourceforge/%{name}/%{name}-%{version}.tar.gz
 Patch0:		cvsfs-Makefile.am.patch
 Patch1:		cvsfs-PPC.patch
+Patch2:		cvsfs-AXP.patch
 URL:		http://sourceforge.net/projects/cvsfs/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -62,6 +63,9 @@ Modó³ CVS FS fla kernela SMP.
 %patch0 -p0
 %ifarch ppc
 %patch1 -p1
+%endif
+%ifarch alpha
+%patch2 -p1
 %endif
 
 %build
