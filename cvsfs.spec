@@ -9,7 +9,7 @@ Version:	1.1.4
 Release:	%{_rel}
 License:	GPL
 Group:		Tools
-Source0:	ftp://download.sourceforge.net/pub/sourceforge/%{name}/%{name}-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 Patch0:		cvsfs-Makefile.am.patch
 Patch1:		cvsfs-PPC.patch
 Patch2:		cvsfs-AXP.patch
