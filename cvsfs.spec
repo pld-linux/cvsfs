@@ -24,7 +24,10 @@ BuildRequires:	rpmbuild(macros) >= 1.118
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-CVS FS tools.
+This provides a package which presents the CVS contents as mountable
+file system. It allows to view the versioned files as like they were
+ordinary files on a disk. There is also a possibility to check in/out
+some files for editing.
 
 %description -l pl
 Narzêdzia do obs³ugi CVS FS.
