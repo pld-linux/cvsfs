@@ -11,6 +11,7 @@ Release:	%{_rel}
 License:	GPL
 Group:		Tools
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
+# Source0-md5:	ed6477a0288d913b476fcaab787188ff
 Patch0:		cvsfs-Makefile.am.patch
 Patch1:		cvsfs-PPC.patch
 Patch2:		cvsfs-AXP.patch
