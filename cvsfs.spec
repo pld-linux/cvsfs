@@ -73,7 +73,7 @@ Modu³ CVS FS dla j±dra Linuksa SMP.
 %{__aclocal}
 %{__automake} --gnu
 %{__autoconf}
-%configure 
+%configure
 
 CXXFLAGS="-DMODULES -D__SMP__ -D__KERNEL_SMP=1" %{__make}
 
