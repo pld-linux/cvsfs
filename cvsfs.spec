@@ -115,8 +115,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n kernel-cvsfs
 %defattr(644,root,root,755)
-%attr(600,root,root) /lib/modules/%{_kernel_ver}/fs/cvsfs.o*
+/lib/modules/%{_kernel_ver}/fs/cvsfs.o*
 
 %files -n kernel-smp-cvsfs
 %defattr(644,root,root,755)
-%attr(600,root,root) /lib/modules/%{_kernel_ver}smp/fs/cvsfs.o*
+/lib/modules/%{_kernel_ver}smp/fs/cvsfs.o*
