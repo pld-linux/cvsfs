@@ -1,23 +1,21 @@
-Summary:	CVSFS
-Summary(pl):	CVSFS
+Summary:	CVSFS - CVS filesystem
+Summary(pl):	CVSFS - system plikowy CVS
 Name:		cvsfs
 Version:	1.0.9
-%define		_rel 1
+%define		_rel 2
 Release:	%{_rel}
 License:	GPL
-Group:		Networking/Daemons
-Source0:	%{name}-%{version}.tar.gz
+Group:		Tools
+Source0:	http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
+URL:		http://sourceforge.net/projects/cvsfs/
 %{!?_without_dist_kernel:BuildRequires: kernel-headers}
-#BuildRequires:	autoconf
-#BuildRequires:	automake
-
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-#%define		_sysconfdir	/etc
-
 %description
+CVS FS tools.
 
 %description -l pl
+Narzêdzia do obs³ugi CVS FS.
 
 %package -n kernel-cvsfs
 Summary:	CVSFS kernel module
@@ -25,11 +23,14 @@ Summary(pl):	Modu³ j±dra CVSFS
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 Prereq:		/sbin/depmod
+Requires:	cvsfs
 %{!?_without_dist_kernel:%requires_releq_kernel_up}
 
 %description -n kernel-cvsfs
+CVS FS module.
 
 %description -n kernel-cvsfs -l pl
+Modó³ CVS FS.
 
 %package -n kernel-smp-cvsfs
 Summary:	CVSFS kernel module
@@ -37,11 +38,14 @@ Summary(pl):	Modu³ j±dra CVSFS
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 Prereq:		/sbin/depmod
+Requires:	cvsfs
 %{!?_without_dist_kernel:%requires_releq_kernel_smp}
 
 %description -n kernel-smp-cvsfs
+CVS FS module for SMP kernel.
 
 %description -n kernel-smp-cvsfs -l pl
+Modó³ CVS FS fla kernela SMP.
 
 %prep
 %setup -q
@@ -69,8 +73,6 @@ install cvsumount/cvsumount $RPM_BUILD_ROOT%{_sbindir}
 
 install cvsfs/cvsfs.o $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}/fs
 install cvsfs/cvsfs-smp.o $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}smp/fs/cvsfs.o
-
-#gzip -9nf README* tcpdump.patch CHANGES
 
 %clean
 rm -rf $RPM_BUILD_ROOT
