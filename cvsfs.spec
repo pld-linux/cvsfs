@@ -13,7 +13,7 @@ Group:		Networking/Daemons
 Group(de):	Netzwerkwesen/Server
 Group(pl):	Sieciowe/Serwery
 Source0:	ftp://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.zip
-Patch0:	%{name}-config.patch
+Patch0:		%{name}-config.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc
@@ -60,9 +60,6 @@ gzip -9nf ChangeLog README INSTALL
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
-%postun
-
 %post -n kernel%{smpstr}-cvsfs
 /sbin/depmod -a
 
@@ -71,7 +68,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc 
+%doc ChangeLog.gz README.gz
 %attr(755,root,root) %{_bindir}/*
 
 %files -n kernel%{smpstr}-cvsfs
