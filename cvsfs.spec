@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without  dist_kernel	# without kernel from distribution
+%bcond_without	dist_kernel	# without kernel from distribution
 #
 Summary:	CVSFS - CVS filesystem
 Summary(pl):	CVSFS - system plikowy CVS
