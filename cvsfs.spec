@@ -19,8 +19,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_sysconfdir	/etc
 
 %description
-
-%description -l pl
+CVS fs
 
 %package -n kernel%{smpstr}-cvsfs
 Summary:	CVSFS kernel module
@@ -29,11 +28,10 @@ Release:	%{release}@%{_kernel_ver_str}
 Group:		Base/Kernel
 Group(de):	Grundsätzlich/Kern
 Group(pl):	Podstawowe/J±dro
-Prereq:		/sbin/depmod
+PreReq:		/sbin/depmod
 
 %description -n kernel%{smpstr}-cvsfs
-
-%description -n kernel%{smpstr}-cvsfs -l pl
+Modu³ j±dra CVS fs.
 
 %prep
 %setup -q
@@ -49,7 +47,7 @@ Prereq:		/sbin/depmod
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir}} \
-	$RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}/fs 
+	$RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}/fs
 
 install cvsmnt/cvsmnt $RPM_BUILD_ROOT%{_bindir}
 install cvsmount/cvsmount $RPM_BUILD_ROOT%{_bindir}
