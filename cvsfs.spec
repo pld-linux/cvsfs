@@ -9,7 +9,7 @@ Version:	1.1.9
 %define		_rel 0.1
 Release:	%{_rel}
 License:	GPL
-Group:		Tools
+Group:		Applications/System
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 # Source0-md5:	622365b1b94e85653cec013fa43504d3
 Patch0:		cvsfs-Makefile.am.patch
