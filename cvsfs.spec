@@ -1,4 +1,4 @@
-%define		_kernel_ver %(grep UTS_RELEASE %{_kernelsrcdir}/include/linux/version.h 2>/dev/null | cut -d'"' -f2)
+%define		_kernel_ver	%(grep UTS_RELEASE %{_kernelsrcdir}/include/linux/version.h 2>/dev/null | cut -d'"' -f2)
 %define		_kernel_ver_str	%(echo %{_kernel_ver} | sed s/-/_/g)
 %define		smpstr		%{?_with_smp:-smp}
 %define		smp		%{?_with_smp:1}%{!?_with_smp:0}
@@ -19,7 +19,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_sysconfdir	/etc
 
 %description
-CVS fs
+CVS fs.
 
 %package -n kernel%{smpstr}-cvsfs
 Summary:	CVSFS kernel module
@@ -31,6 +31,9 @@ Group(pl):	Podstawowe/J±dro
 PreReq:		/sbin/depmod
 
 %description -n kernel%{smpstr}-cvsfs
+CVS fs kernel module.
+
+%description -n kernel%{smpstr}-cvsfs -l pl
 Modu³ j±dra CVS fs.
 
 %prep
