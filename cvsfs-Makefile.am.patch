@@ -1,0 +1,8 @@
+--- Makefile.am.org	Thu Sep  5 22:03:04 2002
++++ Makefile.am	Thu Sep 12 12:10:06 2002
+@@ -2,4 +2,4 @@
+ 
+ EXTRA_DIST = makedevs rmdevs cvsfs.spec.in
+ 
+-SUBDIRS = cvsfs cvsfsd cvsmnt cvsmount cvsumount include init tools
++SUBDIRS = cvsfs cvsmnt cvsmount cvsumount include init tools
