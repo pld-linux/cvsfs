@@ -10,7 +10,7 @@ Version:	1.1.9
 Release:	%{_rel}
 License:	GPL
 Group:		Applications/System
-Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/cvsfs/%{name}-%{version}.tar.gz
 # Source0-md5:	622365b1b94e85653cec013fa43504d3
 Patch0:		cvsfs-Makefile.am.patch
 Patch1:		cvsfs-PPC.patch
@@ -30,7 +30,11 @@ ordinary files on a disk. There is also a possibility to check in/out
 some files for editing.
 
 %description -l pl
-Narzêdzia do obs³ugi CVS FS.
+Ten pakiet zawiera narzêdzia prezentuj±ce zawarto¶æ repozytorium CVS
+jako montowalny system plików. CVSFS umo¿liwia przegl±danie
+wersjonowanych plików w taki sposób, jakby by³y zwyk³ymi plikami na
+dysku. Jest tak¿e mo¿liwo¶æ pobrania i zapisania plików po
+zmodyfikowaniu.
 
 %package -n kernel-cvsfs
 Summary:	CVSFS Linux kernel module
