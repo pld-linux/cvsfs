@@ -19,7 +19,7 @@ URL:		http://sourceforge.net/projects/cvsfs/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libstdc++-devel
-%{!?_without_dist_kernel:BuildRequires: kernel-headers}
+%{!?_without_dist_kernel:BuildRequires:	kernel-headers}
 BuildRequires:	rpmbuild(macros) >= 1.118
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
