@@ -10,8 +10,6 @@ Version:	1.0.4
 Release:	1
 License:	GPL
 Group:		Networking/Daemons
-Group(de):	Netzwerkwesen/Server
-Group(pl):	Sieciowe/Serwery
 Source0:	http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.zip
 Patch0:		%{name}-config.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -26,8 +24,6 @@ Summary:	CVSFS kernel module
 Summary(pl):	Modu³ j±dra CVSFS
 Release:	%{release}@%{_kernel_ver_str}
 Group:		Base/Kernel
-Group(de):	Grundsätzlich/Kern
-Group(pl):	Podstawowe/J±dro
 PreReq:		/sbin/depmod
 
 %description -n kernel%{smpstr}-cvsfs
