@@ -1,3 +1,7 @@
+#
+# Conditional build:
+# _without_dist_kernel	- without kernel from distribution
+#
 Summary:	CVSFS - CVS filesystem
 Summary(pl):	CVSFS - system plikowy CVS
 Name:		cvsfs
@@ -93,17 +97,17 @@ install cvsfs/cvsfs-smp.o $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}smp/fs/cvsfs
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post -n kernel-cvsfs
-/sbin/depmod -a
+%post	-n kernel-cvsfs
+/sbin/depmod -a -F /boot/System.map-%{_kernel_ver} %{_kernel_ver}
 
 %postun -n kernel-cvsfs
-/sbin/depmod -a
+/sbin/depmod -a -F /boot/System.map-%{_kernel_ver} %{_kernel_ver}
 
-%post -n kernel-smp-cvsfs
-/sbin/depmod -a
+%post	-n kernel-smp-cvsfs
+/sbin/depmod -a -F /boot/System.map-%{_kernel_ver}smp %{_kernel_ver}smp
 
 %postun -n kernel-smp-cvsfs
-/sbin/depmod -a
+/sbin/depmod -a -F /boot/System.map-%{_kernel_ver}smp %{_kernel_ver}smp
 
 %files
 %defattr(644,root,root,755)
