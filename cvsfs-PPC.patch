@@ -1,0 +1,22 @@
+--- cvsfs-1.1.4/cvsfs/Makefile.in.org	Mon Sep  9 01:05:14 2002
++++ cvsfs-1.1.4/cvsfs/Makefile.in	Sun Dec 15 12:36:04 2002
+@@ -72,7 +72,7 @@
+ CFLAGS = -O3 -Wall -fomit-frame-pointer
+ INCLUDES = -I/lib/modules/$(KERNEL_VERSION)/build/include
+ 
+-LINK = $(LD) -m elf_i386 -r -o $@
++LINK = $(LD) -m elf32ppclinux -r -o $@
+ 
+ libdir = /lib/modules/$(KERNEL_VERSION)/kernel/fs/
+ 
+--- cvsfs-1.1.4/cvsfs/Makefile.am.org	Mon Sep  9 00:45:31 2002
++++ cvsfs-1.1.4/cvsfs/Makefile.am	Sun Dec 15 12:35:48 2002
+@@ -8,7 +8,7 @@
+ CFLAGS = -O3 -Wall -fomit-frame-pointer
+ INCLUDES = -I/lib/modules/$(KERNEL_VERSION)/build/include
+ 
+-LINK = $(LD) -m elf_i386 -r -o $@
++LINK = $(LD) -m elf32ppclinux -r -o $@
+ 
+ libdir = /lib/modules/$(KERNEL_VERSION)/kernel/fs/
+ 
