@@ -1,4 +1,3 @@
-#
 
 %define		no_install_post_compress_modules 1
 
@@ -18,7 +17,6 @@ URL:		http://sourceforge.net/projects/cvsfs/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libstdc++-devel
-BuildRequires:	gcc-c++
 %{!?_without_dist_kernel:BuildRequires: kernel-headers}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -29,34 +27,34 @@ CVS FS tools.
 Narzêdzia do obs³ugi CVS FS.
 
 %package -n kernel-cvsfs
-Summary:	CVSFS kernel module
-Summary(pl):	Modu³ j±dra CVSFS
+Summary:	CVSFS Linux kernel module
+Summary(pl):	Modu³ j±dra Linuksa CVSFS
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
-Prereq:		/sbin/depmod
-Requires:	cvsfs
 %{!?_without_dist_kernel:%requires_releq_kernel_up}
+Requires(post,postun):	/sbin/depmod
+Requires:	cvsfs
 
 %description -n kernel-cvsfs
-CVS FS module.
+CVS FS Linux kernel module.
 
 %description -n kernel-cvsfs -l pl
-Modó³ CVS FS.
+Modu³ j±dra Linuksa CVS FS.
 
 %package -n kernel-smp-cvsfs
-Summary:	CVSFS kernel module
-Summary(pl):	Modu³ j±dra CVSFS
+Summary:	CVSFS Linux SMP kernel module
+Summary(pl):	Modu³ j±dra Linuksa SMP CVSFS
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
-Prereq:		/sbin/depmod
-Requires:	cvsfs
 %{!?_without_dist_kernel:%requires_releq_kernel_smp}
+Requires(post,postun):	/sbin/depmod
+Requires:	cvsfs
 
 %description -n kernel-smp-cvsfs
-CVS FS module for SMP kernel.
+CVS FS module for Linux SMP kernel.
 
 %description -n kernel-smp-cvsfs -l pl
-Modó³ CVS FS fla kernela SMP.
+Modu³ CVS FS dla j±dra Linuksa SMP.
 
 %prep
 %setup -q
@@ -70,7 +68,7 @@ Modó³ CVS FS fla kernela SMP.
 
 %build
 %{__aclocal}
-%{__automake} --gnu --add-missing
+%{__automake} --gnu
 %{__autoconf}
 %configure 
 
@@ -117,8 +115,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n kernel-cvsfs
 %defattr(644,root,root,755)
-%attr(600,root,root) /lib/modules/%{_kernel_ver}/fs/cvsfs.o
+%attr(600,root,root) /lib/modules/%{_kernel_ver}/fs/cvsfs.o*
 
 %files -n kernel-smp-cvsfs
 %defattr(644,root,root,755)
-%attr(600,root,root) /lib/modules/%{_kernel_ver}smp/fs/cvsfs.o
+%attr(600,root,root) /lib/modules/%{_kernel_ver}smp/fs/cvsfs.o*
