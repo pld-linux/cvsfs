@@ -1,12 +1,13 @@
 Summary:	CVSFS - CVS filesystem
 Summary(pl):	CVSFS - system plikowy CVS
 Name:		cvsfs
-Version:	1.0.9
+Version:	1.1.4
 %define		_rel 2
 Release:	%{_rel}
 License:	GPL
 Group:		Tools
-Source0:	http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
+Source0:	ftp://download.sourceforge.net/pub/sourceforge/%{name}/%{name}-%{version}.tar.gz
+Patch0:		cvsfs-Makefile.am.patch
 URL:		http://sourceforge.net/projects/cvsfs/
 %{!?_without_dist_kernel:BuildRequires: kernel-headers}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -49,9 +50,13 @@ Modó³ CVS FS fla kernela SMP.
 
 %prep
 %setup -q
+%patch0 -p0
 
 %build
-%configure2_13 
+aclocal
+automake --gnu --copy --force --add-missing
+autoconf
+%configure 
 
 CXXFLAGS="-DMODULES -D__SMP__ -D__KERNEL_SMP=1" %{__make}
 
