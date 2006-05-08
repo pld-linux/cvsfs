@@ -6,8 +6,7 @@ Summary:	CVSFS - CVS filesystem
 Summary(pl):	CVSFS - system plikowy CVS
 Name:		cvsfs
 Version:	1.1.9
-%define		_rel 0.1
-Release:	%{_rel}
+Release:	0.1
 License:	GPL
 Group:		Applications/System
 Source0:	http://dl.sourceforge.net/cvsfs/%{name}-%{version}.tar.gz
