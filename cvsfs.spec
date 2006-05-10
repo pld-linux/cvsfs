@@ -1,24 +1,32 @@
 #
 # Conditional build:
 %bcond_without	dist_kernel	# without kernel from distribution
+%bcond_without	kernel		# don't build kernel modules
+%bcond_without	userspace	# don't build userspace tools
 #
+%define		_kernelsrcdir		/usr/src/linux-2.4
 Summary:	CVSFS - CVS filesystem
 Summary(pl):	CVSFS - system plikowy CVS
 Name:		cvsfs
 Version:	1.1.9
-Release:	0.1
+%define	_rel	0.1
+Release:	%{_rel}
 License:	GPL
 Group:		Applications/System
 Source0:	http://dl.sourceforge.net/cvsfs/%{name}-%{version}.tar.gz
 # Source0-md5:	622365b1b94e85653cec013fa43504d3
-Patch0:		cvsfs-Makefile.am.patch
-Patch1:		cvsfs-PPC.patch
-Patch2:		cvsfs-AXP.patch
+Patch0:		%{name}-Makefile.am.patch
+Patch1:		%{name}-PPC.patch
+Patch2:		%{name}-AXP.patch
 URL:		http://sourceforge.net/projects/cvsfs/
 BuildRequires:	autoconf
 BuildRequires:	automake
+%if %{with userspace}
 BuildRequires:	libstdc++-devel
-%{?with_dist_kernel:BuildRequires:	kernel-headers}
+%endif
+%if %{with kernel}
+%{?with_dist_kernel:BuildRequires:	kernel24-headers}
+%endif
 BuildRequires:	rpmbuild(macros) >= 1.118
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -35,34 +43,34 @@ wersjonowanych plików w taki sposób, jakby by³y zwyk³ymi plikami na
 dysku. Jest tak¿e mo¿liwo¶æ pobrania i zapisania plików po
 zmodyfikowaniu.
 
-%package -n kernel-cvsfs
+%package -n kernel24-cvsfs
 Summary:	CVSFS Linux kernel module
 Summary(pl):	Modu³ j±dra Linuksa CVSFS
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 %{?with_dist_kernel:%requires_releq_kernel_up}
 Requires(post,postun):	/sbin/depmod
-Requires:	cvsfs
+Requires:	%{name} = %{version}-%{release}
 
-%description -n kernel-cvsfs
+%description -n kernel24-cvsfs
 CVS FS Linux kernel module.
 
-%description -n kernel-cvsfs -l pl
+%description -n kernel24-cvsfs -l pl
 Modu³ j±dra Linuksa CVS FS.
 
-%package -n kernel-smp-cvsfs
+%package -n kernel24-smp-cvsfs
 Summary:	CVSFS Linux SMP kernel module
 Summary(pl):	Modu³ j±dra Linuksa SMP CVSFS
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 %{?with_dist_kernel:%requires_releq_kernel_smp}
 Requires(post,postun):	/sbin/depmod
-Requires:	cvsfs
+Requires:	%{name} = %{version}-%{release}
 
-%description -n kernel-smp-cvsfs
+%description -n kernel24-smp-cvsfs
 CVS FS module for Linux SMP kernel.
 
-%description -n kernel-smp-cvsfs -l pl
+%description -n kernel24-smp-cvsfs -l pl
 Modu³ CVS FS dla j±dra Linuksa SMP.
 
 %prep
@@ -81,51 +89,67 @@ Modu³ CVS FS dla j±dra Linuksa SMP.
 %{__autoconf}
 %configure
 
-CXXFLAGS="-DMODULES -D__SMP__ -D__KERNEL_SMP=1" %{__make}
-
+%if %{with kernel}
+%{__make} -C cvsfs \
+	CFLAGS="%{rpmcflags} -fomit-frame-pointer -Wall -D__SMP__ -D__KERNEL_SMP=1" \
+	INCLUDES="-I%{_kernelsrcdir}/include"
 mv cvsfs/cvsfs.o cvsfs/cvsfs-smp.o
+%{__make} -C cvsfs clean
+%{__make} -C cvsfs \
+	CFLAGS="%{rpmcflags} -fomit-frame-pointer -Wall" \
+	INCLUDES="-I%{_kernelsrcdir}/include"
+%endif
 
-%{__make}
+%if %{with userspace}
+for d in cvsfsd cvsmnt cvsmount cvsumount include init tools ; do
+	%{__make} -C $d
+done
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d \
-	$RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}/fs \
-	$RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}smp/fs \
-	$RPM_BUILD_ROOT%{_sbindir}
+%if %{with kernel}
+install -d $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}{,smp}/fs
+install cvsfs/cvsfs.o $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}/fs
+install cvsfs/cvsfs-smp.o $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}smp/fs/cvsfs.o
+%endif
 
+%if %{with userspace}
+install -d $RPM_BUILD_ROOT%{_sbindir}
 install cvsmnt/cvsmnt $RPM_BUILD_ROOT%{_sbindir}
 install cvsmount/cvsmount $RPM_BUILD_ROOT%{_sbindir}
 install cvsumount/cvsumount $RPM_BUILD_ROOT%{_sbindir}
-
-install cvsfs/cvsfs.o $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}/fs
-install cvsfs/cvsfs-smp.o $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}smp/fs/cvsfs.o
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-n kernel-cvsfs
+%post	-n kernel24-cvsfs
 %depmod %{_kernel_ver}
 
-%postun -n kernel-cvsfs
+%postun -n kernel24-cvsfs
 %depmod %{_kernel_ver}
 
-%post	-n kernel-smp-cvsfs
+%post	-n kernel24-smp-cvsfs
 %depmod %{_kernel_ver}smp
 
-%postun -n kernel-smp-cvsfs
+%postun -n kernel24-smp-cvsfs
 %depmod %{_kernel_ver}smp
 
+%if %{with userspace}
 %files
 %defattr(644,root,root,755)
 %doc ChangeLog README
 %attr(755,root,root) %{_sbindir}/*
+%endif
 
-%files -n kernel-cvsfs
+%if %{with kernel}
+%files -n kernel24-cvsfs
 %defattr(644,root,root,755)
 /lib/modules/%{_kernel_ver}/fs/cvsfs.o*
 
-%files -n kernel-smp-cvsfs
+%files -n kernel24-smp-cvsfs
 %defattr(644,root,root,755)
 /lib/modules/%{_kernel_ver}smp/fs/cvsfs.o*
+%endif
