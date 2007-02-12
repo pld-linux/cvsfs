@@ -6,7 +6,7 @@
 #
 %define		_kernelsrcdir		/usr/src/linux-2.4
 Summary:	CVSFS - CVS filesystem
-Summary(pl.UTF-8):   CVSFS - system plikowy CVS
+Summary(pl.UTF-8):	CVSFS - system plikowy CVS
 Name:		cvsfs
 Version:	1.1.9
 %define	_rel	0.1
@@ -45,7 +45,7 @@ zmodyfikowaniu.
 
 %package -n kernel24-cvsfs
 Summary:	CVSFS Linux kernel module
-Summary(pl.UTF-8):   Moduł jądra Linuksa CVSFS
+Summary(pl.UTF-8):	Moduł jądra Linuksa CVSFS
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 %{?with_dist_kernel:%requires_releq_kernel_up}
@@ -60,7 +60,7 @@ Moduł jądra Linuksa CVS FS.
 
 %package -n kernel24-smp-cvsfs
 Summary:	CVSFS Linux SMP kernel module
-Summary(pl.UTF-8):   Moduł jądra Linuksa SMP CVSFS
+Summary(pl.UTF-8):	Moduł jądra Linuksa SMP CVSFS
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 %{?with_dist_kernel:%requires_releq_kernel_smp}
