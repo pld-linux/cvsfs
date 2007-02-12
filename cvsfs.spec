@@ -6,7 +6,7 @@
 #
 %define		_kernelsrcdir		/usr/src/linux-2.4
 Summary:	CVSFS - CVS filesystem
-Summary(pl):	CVSFS - system plikowy CVS
+Summary(pl.UTF-8):   CVSFS - system plikowy CVS
 Name:		cvsfs
 Version:	1.1.9
 %define	_rel	0.1
@@ -36,16 +36,16 @@ file system. It allows to view the versioned files as like they were
 ordinary files on a disk. There is also a possibility to check in/out
 some files for editing.
 
-%description -l pl
-Ten pakiet zawiera narzêdzia prezentuj±ce zawarto¶æ repozytorium CVS
-jako montowalny system plików. CVSFS umo¿liwia przegl±danie
-wersjonowanych plików w taki sposób, jakby by³y zwyk³ymi plikami na
-dysku. Jest tak¿e mo¿liwo¶æ pobrania i zapisania plików po
+%description -l pl.UTF-8
+Ten pakiet zawiera narzÄ™dzia prezentujÄ…ce zawartoÅ›Ä‡ repozytorium CVS
+jako montowalny system plikÃ³w. CVSFS umoÅ¼liwia przeglÄ…danie
+wersjonowanych plikÃ³w w taki sposÃ³b, jakby byÅ‚y zwykÅ‚ymi plikami na
+dysku. Jest takÅ¼e moÅ¼liwoÅ›Ä‡ pobrania i zapisania plikÃ³w po
 zmodyfikowaniu.
 
 %package -n kernel24-cvsfs
 Summary:	CVSFS Linux kernel module
-Summary(pl):	Modu³ j±dra Linuksa CVSFS
+Summary(pl.UTF-8):   ModuÅ‚ jÄ…dra Linuksa CVSFS
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 %{?with_dist_kernel:%requires_releq_kernel_up}
@@ -55,12 +55,12 @@ Requires:	%{name} = %{version}-%{release}
 %description -n kernel24-cvsfs
 CVS FS Linux kernel module.
 
-%description -n kernel24-cvsfs -l pl
-Modu³ j±dra Linuksa CVS FS.
+%description -n kernel24-cvsfs -l pl.UTF-8
+ModuÅ‚ jÄ…dra Linuksa CVS FS.
 
 %package -n kernel24-smp-cvsfs
 Summary:	CVSFS Linux SMP kernel module
-Summary(pl):	Modu³ j±dra Linuksa SMP CVSFS
+Summary(pl.UTF-8):   ModuÅ‚ jÄ…dra Linuksa SMP CVSFS
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 %{?with_dist_kernel:%requires_releq_kernel_smp}
@@ -70,8 +70,8 @@ Requires:	%{name} = %{version}-%{release}
 %description -n kernel24-smp-cvsfs
 CVS FS module for Linux SMP kernel.
 
-%description -n kernel24-smp-cvsfs -l pl
-Modu³ CVS FS dla j±dra Linuksa SMP.
+%description -n kernel24-smp-cvsfs -l pl.UTF-8
+ModuÅ‚ CVS FS dla jÄ…dra Linuksa SMP.
 
 %prep
 %setup -q
